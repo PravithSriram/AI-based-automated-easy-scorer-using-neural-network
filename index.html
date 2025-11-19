@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Scorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------- */
+        /* Global Styles */
+        /* ------------------------- */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 3em;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        /* ------------------------- */
+        /* Form Styles */
+        /* ------------------------- */
+        form {
+            width: 100%;
+            max-width: 700px;
+            background-color: rgba(255,255,255,0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease forwards;
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106,17,203,0.4);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 18px;
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        button:hover {
+            background: #2575fc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ------------------------- */
+        /* Result Styles */
+        /* ------------------------- */
+        .result {
+            width: 100%;
+            max-width: 700px;
+            background-color: #fff;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease forwards;
+        }
+        .result p {
+            font-size: 18px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .score {
+            font-weight: 700;
+            color: #6a11cb;
+            font-size: 1.2em;
+        }
+
+        /* ------------------------- */
+        /* Animations */
+        /* ------------------------- */
+        @keyframes fadeInUp {
+            from {opacity: 0; transform: translateY(30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeInDown {
+            from {opacity: 0; transform: translateY(-30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* ------------------------- */
+        /* Responsive */
+        /* ------------------------- */
+        @media(max-width: 600px){
+            h1 {
+                font-size: 2.2em;
+            }
+            textarea {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Essay Scorer</h1>
+    <form method="POST">
+        <textarea name="essay" placeholder="Paste your essay here...">{{ essay|default('') }}</textarea>
+        <button type="submit">Get Score</button>
+    </form>
+
+    {% if score %}
+    <div class="result">
+        <p><strong>Your Essay:</strong></p>
+        <p>{{ essay }}</p>
+        <hr>
+        <p>Final Score: <span class="score">{{ score }}/10</span></p>
+        <p>Grammar & Spelling: <span class="score">{{ grammar }}/10</span></p>
+        <p>Model Score: <span class="score">{{ model }}/10</span></p>
+    </div>
+    {% endif %}
+</body>
+</html>
